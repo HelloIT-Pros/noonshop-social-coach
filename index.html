@@ -37,6 +37,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 .top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:14px;flex:1 1 520px;min-width:0}
+.logo{display:inline-flex;flex:none;border-radius:4px}
+.logo img{display:block;height:40px;width:auto;filter:brightness(0)}
+:root[data-theme="dark"] .logo img{filter:none}
 .top h1{font-size:22px;font-weight:700;letter-spacing:-.01em}
 .top p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
 .controls{display:flex;align-items:flex-end;gap:10px}
@@ -206,6 +210,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   .insights div:first-child{border-top:0}
 }
 @media (max-width:520px){
+  .brand{flex-direction:column;align-items:flex-start;gap:10px}
   .list-head,.row{grid-template-columns:22px 44px minmax(0,1fr) 54px}
   .list-head .c-views,.row .c-views,.list-head .c-risk,.row .c-risk{display:none}
   .nrow{grid-template-columns:22px 44px minmax(0,1fr) 54px}
@@ -239,9 +244,12 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 <div class="wrap">
   <header class="top">
-    <div>
+    <div class="brand">
+      <a class="logo" href="./" id="home" aria-label="Noon Shop, back to the homepage" title="Back to the homepage"><img src="data:image/png;base64,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" alt="Noon Shop" width="126" height="46"></a>
+      <div>
       <h1>Noonshop Social Coach</h1>
       <p>Eyewear Reels that beat their creator's normal views, with a breakdown of why each one worked. <span id="pulled"></span> <span id="updated"></span></p>
+      </div>
     </div>
     <div class="controls">
       <div class="field"><label for="topic">Topic</label>
@@ -555,6 +563,7 @@ function readHash(){
   if (VIEW === "reels" && selectedId) { renderRows(); renderPanel(); const el = document.querySelector(`.row[data-id="${CSS.escape(selectedId)}"]`); if (el) el.scrollIntoView({block:"nearest"}); }
   renderView();
 }
+document.getElementById("home").addEventListener("click", e => { e.preventDefault(); location.href = location.pathname; });
 window.addEventListener("hashchange", () => { readHash(); window.scrollTo({top:0}); });
 
 function renderAll(){
