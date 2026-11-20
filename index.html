@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -395,13 +395,14 @@ function applyTheme(t){
   const dark = t === "dark";
   b.innerHTML = `<svg class="icon"><use href="#i-${dark?'sun':'moon'}"/></svg><span>${dark?'Light':'Dark'}</span>`;
   b.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-  try { localStorage.setItem("noon-reelcoach-theme", t); } catch(e){}
 }
 let startTheme = null;
-try { startTheme = localStorage.getItem("noon-reelcoach-theme"); } catch(e){}
-if (!startTheme) startTheme = (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
-applyTheme(startTheme);
-document.getElementById("theme").onclick = () => applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+try { startTheme = localStorage.getItem("noonshop-coach-theme"); } catch(e){}
+applyTheme(startTheme === "dark" ? "dark" : "light");
+document.getElementById("theme").onclick = () => {
+  const t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  applyTheme(t); try { localStorage.setItem("noonshop-coach-theme", t); } catch(e){}
+};
 
 let STATUS = "Loading Reels...";
 let VIEW = "new", UPDATED = "", openFormat = null;
